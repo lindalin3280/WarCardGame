@@ -1,41 +1,42 @@
 package org.linda.war_cardgame.pojo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class DeckImpl implements Deck {
-	private ArrayList<Card> cards = new ArrayList<Card>();
+	private List<Card> cards = new ArrayList<Card>();
 
 	public List<Card> getCards() {
 		return cards;
 	}
 
-	public void setCards(ArrayList<Card> cards) {
+	public void setCards(List<Card> cards) {
 		this.cards = cards;
 	}
 
 	public void create(int numberOfSuits, int numberOfRanks) {
 		for (int i = 0; i < numberOfSuits; i++) {
 			for (int j = 0; j < numberOfRanks; j++) {
-				cards.add(new Card(i, new Suit(j)));
+				cards.add(new Card(new Rank(i), new Suit(j)));
 			}
 		}
 
 	}
 
 	public void shuffle() {
-		 if (cards == null) {
-		      throw new RuntimeException("Deck has not be created yet.");
-		    }
+		if (cards == null) {
+			throw new RuntimeException("Deck has not be created yet.");
+		}
 		Collections.shuffle(this.cards);
 	}
 
 	public Card deal() {
 		if (this.cards == null || cards.size() == 0) {
-		      throw new RuntimeException("Deck has not be created yet.");
-		    }
-		    return cards.remove(0);
+			throw new RuntimeException("Deck has not be created yet.");
+		}
+		return cards.remove(0);
 	}
 
 	public static void main(String[] args) {

@@ -2,23 +2,35 @@ package org.linda.war_cardgame.pojo;
 
 public class Card {
 	
-	private int value;
+	private Rank rank;
 	private Suit suit;
 
 	public Card() {
 		
 	}
 
-	public Card(int value, Suit suit) {
+	public Card(Rank rank, Suit suit) {
 		super();
-		this.value = value;
+		this.rank = rank;
 		this.suit = suit;
 	}
 
-	@Override
-	public String toString() {
-		return "Card [value=" + value + ", suit=" + suit + "]";
+	public Rank getRank() {
+		return rank;
 	}
+
+	public void setRank(Rank rank) {
+		this.rank = rank;
+	}
+
+	public Suit getSuit() {
+		return suit;
+	}
+
+	public void setSuit(Suit suit) {
+		this.suit = suit;
+	}
+
 
 	
 }
