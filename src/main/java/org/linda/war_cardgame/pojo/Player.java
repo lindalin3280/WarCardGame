@@ -1,20 +1,28 @@
 package org.linda.war_cardgame.pojo;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.Queue;
 /**
  * A player with cards in hand.
- * @author Lindy
+ * @author Linda
  *
  */
 public class Player {
 	private String name;
-	private List<Card> cardsInHand = new ArrayList<Card>();
+	private Queue<Card> cardsInHand = new LinkedList<Card>();
 	
+	/**
+	 * default constructor.
+	 */
 	public Player() {
 		
 	}
+	
+	/**
+	 * Class constructor specifying name of the player.
+	 * @param name
+	 */
 	public Player(String name) {
 		super();
 		this.name = name;
@@ -23,34 +31,34 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
+		
+	public Queue<Card> getCardsInHand() {
+		return cardsInHand;
 	}
-	public void setCardsInHand(List<Card> cardsInHand) {
-		this.cardsInHand = cardsInHand;
-	}
+
+	/**
+	 * Add one Card to the player's cards in hand.
+	 * @param card
+	 */
 	public void addCard(Card card) {
 		cardsInHand.add(card);
 	}
 
+	/**
+	 * Add a number of Cards to the player's cards in hand.
+	 * @param cards
+	 */
 	public void addCards(List<Card> cards) {
 		cardsInHand.addAll(cards);
 	}
 
-	public Card dealCard() {
-		return cardsInHand.remove(0);
-	}
-
 	/**
-	 * 
+	 * player deal one Card, 
+	 * at the same time, player's cards in hand -1
 	 * @return
 	 */
-	public List<Card> getCardsInHand() {
-		return cardsInHand;
-	}
-
-	public void setCardsOwned(List<Card> cardsInHand) {
-		this.cardsInHand = cardsInHand;
+	public Card dealCard() {
+		return cardsInHand.poll();
 	}
 
 	@Override

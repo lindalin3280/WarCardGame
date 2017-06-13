@@ -11,6 +11,7 @@ import org.linda.war_cardgame.pojo.Rank;
 import org.linda.war_cardgame.pojo.Suit;
 
 public class DeckImpl implements Deck {
+	
 	private List<Card> cards = new ArrayList<Card>();
 
 	public List<Card> getCards() {
@@ -20,7 +21,8 @@ public class DeckImpl implements Deck {
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
 	}
-
+	
+	@Override
 	public void create(String[] suits, String[] ranks, int[] valuesOfRanks) {
 		for (int i = 0; i < suits.length; i++) {
 			for (int j = 0; j < ranks.length; j++) {
@@ -29,7 +31,8 @@ public class DeckImpl implements Deck {
 		}
 
 	}
-
+	
+	@Override
 	public void shuffle() {
 		if (cards == null) {
 			throw new RuntimeException("Deck has not be created yet.");
@@ -37,6 +40,7 @@ public class DeckImpl implements Deck {
 		Collections.shuffle(this.cards);
 	}
 
+	@Override
 	public Card deal() {
 		if (this.cards == null || cards.size() == 0) {
 			throw new RuntimeException("Deck has not be created yet.");

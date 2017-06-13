@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.linda.war_cardgame.config.Config;
 import org.linda.war_cardgame.impl.WarImpl;
 /**
- * The App program implements an application that simply play the card game: War. 
+ * The App class includes the main method.
  * @author Linda
  *
  */
@@ -23,7 +23,7 @@ public class App {
 
 	public static void main(String[] args) {
 		setUpProperties();
-		new WarImpl().play(suits, ranks, valuesOfRanks, players);
+		new WarImpl().startGame(suits, ranks, valuesOfRanks, players);
 	}
 
 	/**
@@ -32,17 +32,24 @@ public class App {
 	public static void setUpProperties() {
 		Properties props = Config.readConfig(projectPath + fileSeparator + "src" + fileSeparator + "main"
 				+ fileSeparator + "resources" + fileSeparator + "application.properties");
+		
 		players = Config.get(props, "players", true).split(", *");
 		logger.info("players = " + Arrays.toString(players));
+		
 		suits = Config.get(props, "suits", true).split(", *");
 		logger.info("suits = " + Arrays.toString(suits));
+		
 		ranks = Config.get(props, "ranks", true).split(", *");
 		logger.info("ranks = " + Arrays.toString(ranks));
+		
 		String[] valuesOfRanks_tokens = Config.get(props, "valuesOfRanks", true).split(", *");
+		
 		if (ranks.length != valuesOfRanks_tokens.length) {
 			logger.error("length of ranks must equals length of valuesOfRanks");
 		}
+		
 		valuesOfRanks = new int[valuesOfRanks_tokens.length];
+		
 		for (int i = 0; i < valuesOfRanks_tokens.length; i++) {
 			valuesOfRanks[i] = Integer.parseInt(valuesOfRanks_tokens[i]);
 		}

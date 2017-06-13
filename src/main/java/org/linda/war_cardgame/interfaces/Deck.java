@@ -8,13 +8,23 @@ import org.linda.war_cardgame.pojo.Card;
  *
  */
 public interface Deck {
-	/* Create the deck of cards */ 
-	public void create(String[] suits, String[] ranks, int[] valuesOfRanks); 
 
-	/* Shuffle the deck */ 
+	/**
+	 * This method is used to create the deck of cards.
+	 * @param suits
+	 * @param ranks
+	 * @param valuesOfRanks
+	 */
+	public void create(String[] suits, String[] ranks, int[] valuesOfRanks); 
+ 
+	/**
+	 * This method is used to shuffle the deck.
+	 */
 	public void shuffle(); 
 
-	/* deal a card from the deck */ 
+	/**
+	 * This method is used to deal a card from the deck.
+	 * @return the dealt Card 
+	 */
 	public Card deal(); 
-
 }

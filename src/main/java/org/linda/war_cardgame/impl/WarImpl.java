@@ -9,11 +9,12 @@ import org.linda.war_cardgame.interfaces.War;
 import org.linda.war_cardgame.pojo.Card;
 import org.linda.war_cardgame.pojo.Player;
 
-public class WarImpl implements War{
+public class WarImpl implements War {
 	static Logger logger = Logger.getLogger(War.class);
 	private boolean hasAFinalWinner = false;
 
-	public void play(String[] suits, String[] ranks, int[] valuesOfRanks, String[] players) {
+	@Override
+	public void startGame(String[] suits, String[] ranks, int[] valuesOfRanks, String[] players) {
 		DeckImpl deck = new DeckImpl();
 		deck.create(suits, ranks, valuesOfRanks);
 		deck.shuffle();
@@ -27,6 +28,7 @@ public class WarImpl implements War{
 
 	}
 
+	@Override
 	public Player[] distributeCards(DeckImpl deck, String[] players) {
 		List<Card> cards = deck.getCards();
 		logger.info("cards.size() = " + cards.size());
@@ -40,12 +42,13 @@ public class WarImpl implements War{
 		for (int i = 0; i < initCardsEachPlayer * numberOfPlayers; i++) {
 			playersOfWar[i % numberOfPlayers].addCard(deck.deal());
 		}
-		for(Player p: playersOfWar) {
+		for (Player p : playersOfWar) {
 			System.out.println(p);
 		}
 		return playersOfWar;
 	}
 
+	@Override
 	public void playOneRound(Player[] playersOfWar) {
 		// cards on table
 		List<Card> cardsOnTable = new ArrayList<Card>();
@@ -71,10 +74,10 @@ public class WarImpl implements War{
 		}
 		Collections.shuffle(cardsOnTable);
 		winner.addCards(cardsOnTable);
-		if(numPlayersWithCard == 1) {
+		if (numPlayersWithCard == 1) {
 			hasAFinalWinner = true;
 		}
-		for(Player player : playersOfWar) {
+		for (Player player : playersOfWar) {
 			System.out.println(player);
 		}
 	}
