@@ -1,12 +1,15 @@
-package org.linda.war_cardgame.pojo;
+package org.linda.war_cardgame.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.linda.war_cardgame.interfaces.War;
+import org.linda.war_cardgame.pojo.Card;
+import org.linda.war_cardgame.pojo.Player;
 
-public class War {
+public class WarImpl implements War{
 	static Logger logger = Logger.getLogger(War.class);
 	private boolean hasAFinalWinner = false;
 
@@ -24,7 +27,7 @@ public class War {
 
 	}
 
-	private Player[] distributeCards(DeckImpl deck, String[] players) {
+	public Player[] distributeCards(DeckImpl deck, String[] players) {
 		List<Card> cards = deck.getCards();
 		logger.info("cards.size() = " + cards.size());
 		int numberOfPlayers = players.length;
@@ -43,7 +46,7 @@ public class War {
 		return playersOfWar;
 	}
 
-	private void playOneRound(Player[] playersOfWar) {
+	public void playOneRound(Player[] playersOfWar) {
 		// cards on table
 		List<Card> cardsOnTable = new ArrayList<Card>();
 		Player winner = playersOfWar[0];

@@ -6,8 +6,12 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.linda.war_cardgame.config.Config;
-import org.linda.war_cardgame.pojo.War;
-
+import org.linda.war_cardgame.impl.WarImpl;
+/**
+ * The App program implements an application that simply play the card game: War. 
+ * @author Linda
+ *
+ */
 public class App {
 	static Logger logger = Logger.getLogger(App.class);
 	private static final String projectPath = System.getProperty("user.dir");
@@ -19,9 +23,12 @@ public class App {
 
 	public static void main(String[] args) {
 		setUpProperties();
-		new War().play(suits, ranks, valuesOfRanks, players);
+		new WarImpl().play(suits, ranks, valuesOfRanks, players);
 	}
 
+	/**
+	 * This method is used to get players, suits, ranks, etc. from application.properties
+	 */
 	public static void setUpProperties() {
 		Properties props = Config.readConfig(projectPath + fileSeparator + "src" + fileSeparator + "main"
 				+ fileSeparator + "resources" + fileSeparator + "application.properties");

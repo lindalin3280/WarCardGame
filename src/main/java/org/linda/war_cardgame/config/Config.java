@@ -5,13 +5,17 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-
+/**
+ * 
+ * @author Linda
+ *
+ */
 public class Config {
 	static Logger logger = Logger.getLogger(Config.class);
 	/**
 	 * read config file
 	 * @param filename -- full path file name
-	 * @return
+	 * @return Properties -- key-value pairs
 	 */
 	public static Properties readConfig(String filename) {
 		Properties prop = new Properties();
@@ -31,6 +35,13 @@ public class Config {
 		return prop;
 	}
 	
+	/**
+	 * This method is used to get String properties from properties file (eg: application.properties)
+	 * @param props
+	 * @param key
+	 * @param isRequiredField
+	 * @return 
+	 */
 	public static String get(Properties props, String key, boolean isRequiredField) {
 		String res = null;
 		try {
@@ -45,6 +56,14 @@ public class Config {
 		}
 		return res;
 	}
+	
+	/**
+	 * This method is used to get int properties from properties file (eg: application.properties)
+	 * @param props
+	 * @param key
+	 * @param isRequiredField
+	 * @return
+	 */
 	public static int getInt(Properties props, String key, boolean isRequiredField) {
 		return Integer.parseInt(get(props, key, isRequiredField));
 	}

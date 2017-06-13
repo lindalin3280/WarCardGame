@@ -1,9 +1,14 @@
-package org.linda.war_cardgame.pojo;
+package org.linda.war_cardgame.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.linda.war_cardgame.interfaces.Deck;
+import org.linda.war_cardgame.pojo.Card;
+import org.linda.war_cardgame.pojo.Rank;
+import org.linda.war_cardgame.pojo.Suit;
 
 public class DeckImpl implements Deck {
 	private List<Card> cards = new ArrayList<Card>();
