@@ -38,7 +38,7 @@ public class Suit {
 
 	@Override
 	public String toString() {
-		return "Suit [id=" + id + "]";
+		return name;
 	}
 	
 }

@@ -1,34 +1,35 @@
 package org.linda.war_cardgame.pojo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 public class War {
-	public void play(int numberOfSuits, int numberOfRanks, int numberOfPlayers) {
+	static Logger logger = Logger.getLogger(War.class);
+	private boolean hasAFinalWinner = false;
+
+	public void play(int numberOfSuits, int numberOfRanks, int numberOfPlayers, String[] namesOfPlayers) {
 		DeckImpl deck = new DeckImpl();
 		deck.create(numberOfSuits, numberOfRanks);
 		deck.shuffle();
-		Player[] players = distributeCards(deck, numberOfPlayers);
-		System.out.println("before one round : " + players[0].getCardsOwned().size());
-		System.out.println("before one round : " + players[1].getCardsOwned().size());
-		System.out.println("before one round : " + players[2].getCardsOwned().size());
-		while (playOneRound(players)) {
+		Player[] players = distributeCards(deck, numberOfPlayers, namesOfPlayers);
+		while (!hasAFinalWinner) {
 			playOneRound(players);
-			System.out.println("after one round : " + players[0].getCardsOwned().size());
-			System.out.println("after one round : " + players[1].getCardsOwned().size());
-			System.out.println("after one round : " + players[2].getCardsOwned().size());
 		}
 
 	}
 
-	private Player[] distributeCards(DeckImpl deck, int numberOfPlayers) {
+	private Player[] distributeCards(DeckImpl deck, int numberOfPlayers, String[] namesOfPlayers) {
 		List<Card> cards = deck.getCards();
 		System.out.println("cards.size() = " + cards.size());
 		Player[] players = new Player[numberOfPlayers];
-		// Arrays.fill(players, new Player());
 		for (int i = 0; i < players.length; i++) {
-			players[i] = new Player();
+			players[i] = new Player(namesOfPlayers[i]);
 		}
 		int initCardsEachPlayer = cards.size() / numberOfPlayers;
 		System.out.println("initCardsEachPlayer = " + initCardsEachPlayer);
@@ -36,30 +37,44 @@ public class War {
 			players[i % numberOfPlayers].addCard(deck.deal());
 		}
 
-		System.out.println(players[0].getCardsOwned().size());
-		System.out.println(players[1].getCardsOwned().size());
+		logger.info(players[0].getName() + " has " + players[0].getCardsInHand().size() + " cards");
+		logger.info("They are: " + players[0].getCardsInHand());
+		logger.info(players[1].getName() + " has " + players[1].getCardsInHand().size() + " cards");
+		logger.info("They are: " + players[1].getCardsInHand());
 		return players;
 	}
 
-	private boolean playOneRound(Player[] players) {
-		int losers = 0;
-		Set<Card> set = new HashSet<Card>();
-		Player winner = new Player();
-		Card maxCard = new Card(new Rank(-1), new Suit(-1));
-		for (int i = 0; i < players.length; i++) {
-			if (players[i].getCardsOwned().size() == 0) {
-				losers++;
-				continue;
-			}
-			Card showedCard = players[i].showCard();
-			set.add(showedCard);
-			winner = showedCard.getRank().getValue() > maxCard.getRank().getValue() ? players[i] : winner;
-			if (losers == players.length - 1) {
-				System.out.println("winner = " + winner);
-				return false;
+	private void playOneRound(Player[] players) {
+		// cards on table
+		List<Card> cardsOnTable = new ArrayList<>();
+		Player winner = players[0];
+		int maxFaceValue = Integer.MIN_VALUE;
+		boolean someoneWinsThisRound = false;
+		int numPlayersWithCard = 0;
+		while (!someoneWinsThisRound) {
+			for (int i = 0; i < players.length; i++) {
+				// lose if no cards left
+				if (players[i].getCardsInHand().size() == 0) {
+					continue;
+				}
+				++numPlayersWithCard;
+				Card dealtCard = players[i].dealCard();
+				cardsOnTable.add(dealtCard);
+				if (dealtCard.getRank().getValue() > maxFaceValue) {
+					maxFaceValue = dealtCard.getRank().getValue();
+					winner = players[i];
+					someoneWinsThisRound = true;
+				}
 			}
 		}
-		winner.addCards(set);
-		return true;
+		Collections.shuffle(cardsOnTable);
+		winner.addCards(cardsOnTable);
+		if(numPlayersWithCard == 1) {
+			hasAFinalWinner = true;
+		}
+		for(Player player : players) {
+			System.out.println(player);
+		}
+		System.out.println("-------------------------------------------------------------------------");
 	}
 }
