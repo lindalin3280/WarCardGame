@@ -16,10 +16,10 @@ public class DeckImpl implements Deck {
 		this.cards = cards;
 	}
 
-	public void create(int numberOfSuits, int numberOfRanks) {
-		for (int i = 0; i < numberOfSuits; i++) {
-			for (int j = 0; j < numberOfRanks; j++) {
-				cards.add(new Card(new Rank(i), new Suit(j)));
+	public void create(String[] suits, String[] ranks, int[] valuesOfRanks) {
+		for (int i = 0; i < suits.length; i++) {
+			for (int j = 0; j < ranks.length; j++) {
+				cards.add(new Card(new Rank(valuesOfRanks[j], ranks[j]), new Suit(suits[i])));
 			}
 		}
 
@@ -37,23 +37,5 @@ public class DeckImpl implements Deck {
 			throw new RuntimeException("Deck has not be created yet.");
 		}
 		return cards.remove(0);
-	}
-
-	public static void main(String[] args) {
-		DeckImpl deck = new DeckImpl();
-		List<Card> cards = deck.getCards();
-		deck.create(4, 13);
-		System.out.println("cards size = " + cards.size());
-		for (Card card : cards) {
-			System.out.println(card);
-		}
-		cards = null;
-		deck.shuffle();
-		// System.out.println("cards size = " + cards.size());
-		//
-		// for(Card card: cards){
-		// System.out.println(card);
-		// }
-
 	}
 }

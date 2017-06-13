@@ -55,7 +55,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player " + name + " has cards: " + cardsInHand;
+		return name + " has " + cardsInHand.size() + " cards: " + cardsInHand;
 	}
 	
 

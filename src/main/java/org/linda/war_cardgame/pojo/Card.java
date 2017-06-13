@@ -1,12 +1,12 @@
 package org.linda.war_cardgame.pojo;
 
 public class Card {
-	
+
 	private Rank rank;
 	private Suit suit;
 
 	public Card() {
-		
+
 	}
 
 	public Card(Rank rank, Suit suit) {
@@ -33,8 +33,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "" + rank + suit;
+		return rank + "-" + suit;
 	}
 
-	
 }

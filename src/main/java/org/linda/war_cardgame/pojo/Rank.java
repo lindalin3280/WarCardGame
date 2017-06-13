@@ -2,6 +2,7 @@ package org.linda.war_cardgame.pojo;
 
 public class Rank {
 	private int value;
+	private String rank;
 
 	public Rank() {
 		
@@ -10,6 +11,12 @@ public class Rank {
 	public Rank(int value) {
 		super();
 		this.value = value;
+	}
+
+	public Rank(int value, String rank) {
+		super();
+		this.value = value;
+		this.rank = rank;
 	}
 
 	public int getValue() {
@@ -22,7 +29,7 @@ public class Rank {
 
 	@Override
 	public String toString() {
-		return value + "";
+		return  rank + "";
 	}
 	
 }
