@@ -46,7 +46,7 @@ public class War {
 
 	private void playOneRound(Player[] players) {
 		// cards on table
-		List<Card> cardsOnTable = new ArrayList<>();
+		List<Card> cardsOnTable = new ArrayList<Card>();
 		Player winner = players[0];
 		int maxFaceValue = Integer.MIN_VALUE;
 		boolean someoneWinsThisRound = false;
