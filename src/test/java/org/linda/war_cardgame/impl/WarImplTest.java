@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Queue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.linda.war_cardgame.pojo.Card;
 import org.linda.war_cardgame.pojo.Player;
@@ -138,6 +139,7 @@ public class WarImplTest {
     }
     
     @Test
+    @Ignore
     public void testPlayOneTime6() {
         WarImpl.numFaceDownCardsIfDraw = 1;
         Player[] playersOfWar = {
@@ -160,5 +162,52 @@ public class WarImplTest {
         assertEquals(playersOfWar[0].getCardsInHand().size(), 0);
         assertEquals(playersOfWar[1].getCardsInHand().size(), 12);
         assertEquals(playersOfWar[2].getCardsInHand().size(), 0);
+    }
+    
+    @Test
+    public void testPlayOneTime7() {
+        WarImpl.numFaceDownCardsIfDraw = 1;
+        Player[] playersOfWar = {
+                new Player(new LinkedList<>(Arrays.asList(
+                        new Card(new Rank(5, "5")), 
+                        new Card(new Rank(6, "6")),
+                        new Card(new Rank(7, "7")),
+                        new Card(new Rank(10, "10")),
+                        new Card(new Rank(10, "10"))))),
+                new Player(new LinkedList<>(Arrays.asList(
+                        new Card(new Rank(5, "5")), 
+                        new Card(new Rank(6, "6")),
+                        new Card(new Rank(7, "7")),
+                        new Card(new Rank(13, "K")),
+                        new Card(new Rank(10, "10"))))),
+                new Player(new LinkedList<>(Arrays.asList(
+                        new Card(new Rank(5, "5")), 
+                        new Card(new Rank(6, "6")),
+                        new Card(new Rank(7, "7")),
+                        new Card(new Rank(11, "J")),
+                        new Card(new Rank(8, "8")))))};
+        warImpl.playOneTime(playersOfWar);
+        assertEquals(playersOfWar[0].getCardsInHand().size(), 15);
+        assertEquals(playersOfWar[1].getCardsInHand().size(), 0);
+        assertEquals(playersOfWar[2].getCardsInHand().size(), 0);
+    }
+    
+    @Test
+    public void testPlayOneTime8() {
+        WarImpl.numFaceDownCardsIfDraw = 4;
+        Player[] playersOfWar = {
+                new Player(new LinkedList<>(Arrays.asList(
+                        new Card(new Rank(5, "5")), 
+                        new Card(new Rank(7, "7")),
+                        new Card(new Rank(13, "K")),
+                        new Card(new Rank(100, "A"))))),
+                new Player(new LinkedList<>(Arrays.asList(
+                        new Card(new Rank(13, "K")), 
+                        new Card(new Rank(7, "7")),
+                        new Card(new Rank(11, "J")),
+                        new Card(new Rank(8, "8")))))};
+        warImpl.playOneTime(playersOfWar);
+        assertEquals(playersOfWar[0].getCardsInHand().size(), 0);
+        assertEquals(playersOfWar[1].getCardsInHand().size(), 8);
     }
 }

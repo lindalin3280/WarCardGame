@@ -75,7 +75,7 @@ public class WarImpl implements War {
                 cardsOnTable.add(p.card);
             }
             allCardsHaveTheSameVal = allCardsHaveTheSameVal(sortedCardsDealtThisRound);
-            System.out.println("sortedCardsDealtThisRound = "
+            logger.debug("sortedCardsDealtThisRound = "
                     + sortedCardsDealtThisRound + ", cardsOnTable = "
                     + cardsOnTable + ", allCardsHaveTheSameVal = "
                     + allCardsHaveTheSameVal);
