@@ -19,17 +19,17 @@ Example result:
 Jack has 3 cards: [jack-diamond, queen-heart, 10-diamond]
 Tom has 3 cards: [jack-heart, ace-heart, queen-diamond]
 Hellen has 3 cards: [10-heart, ace-diamond, king-heart]
--------------------------------------------------------------------------
+
 At game 1
 Jack has 5 cards: [queen-heart, 10-diamond, jack-diamond, jack-heart, 10-heart]
 Tom has 2 cards: [ace-heart, queen-diamond]
 Hellen has 2 cards: [ace-diamond, king-heart]
--------------------------------------------------------------------------
+
 At game 2
 Jack has 4 cards: [10-diamond, jack-diamond, jack-heart, 10-heart]
 Tom has 4 cards: [queen-diamond, ace-heart, ace-diamond, queen-heart]
 Hellen has 1 cards: [king-heart]
--------------------------------------------------------------------------
+
 At game 3
 Jack has 3 cards: [jack-diamond, jack-heart, 10-heart]
 Tom has 3 cards: [ace-heart, ace-diamond, queen-heart]
