@@ -1,6 +1,6 @@
 package org.linda.war_cardgame.pojo;
 
-public class Card {
+public class Card implements Comparable<Card> {
 
     private Rank rank;
     private Suit suit;
@@ -28,4 +28,8 @@ public class Card {
         return rank + "-" + suit;
     }
 
+    @Override
+    public int compareTo(Card o) {
+        return this.rank.compareTo(o.rank);
+    }
 }

@@ -30,5 +30,5 @@ public interface War {
      * 
      * @param playersOfWar
      */
-    public void playOneRound(Player[] playersOfWar);
+    public void playOneTime(Player[] playersOfWar);
 }
