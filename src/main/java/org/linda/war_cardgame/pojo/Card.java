@@ -9,6 +9,11 @@ public class Card implements Comparable<Card> {
 
     }
 
+    public Card(Rank rank) {
+        super();
+        this.rank = rank;
+    }
+
     public Card(Rank rank, Suit suit) {
         super();
         this.rank = rank;

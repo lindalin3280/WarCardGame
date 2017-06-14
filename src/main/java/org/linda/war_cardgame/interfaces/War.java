@@ -17,8 +17,8 @@ public interface War {
             String[] players);
 
     /**
-     * This method is used to distribute cards. It will be called only once for
-     * each game.
+     * This method is used to distribute cards. 
+     * It will be called only once for each game.
      * 
      * @param deck
      * @param players

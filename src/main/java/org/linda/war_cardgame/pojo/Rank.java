@@ -8,6 +8,11 @@ public class Rank implements Comparable<Rank> {
 
     }
 
+    public Rank(String rank) {
+        super();
+        this.rank = rank;
+    }
+
     public Rank(int value) {
         super();
         this.value = value;

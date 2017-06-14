@@ -26,7 +26,7 @@ public class WarImpl implements War {
         do {
             System.out
                     .println("-------------------------------------------------------------------------");
-            System.out.println("After game " + count++);
+            System.out.println("At game " + count++);
             playOneTime(players);
             stopIfDone(players);
             for (Player player : players) {
@@ -63,10 +63,10 @@ public class WarImpl implements War {
         int winnerId = 0;
         while (true) {
             ++roundNum;
-            // key : card dealt in this round, value: index of player who deal
-            // this card
+            // key : card dealt in this round, 
+            // value: index of player who deal this card
             List<CardByPlayerId> sortedCardsDealtThisRound = getSortedCardsDealtThisRound(players);
-            if(sortedCardsDealtThisRound.size() == 0) {
+            if (sortedCardsDealtThisRound.size() == 0) {
                 hasAFinalWinner = true;
                 players[0].addCards(cardsOnTable);
                 return;
@@ -94,6 +94,7 @@ public class WarImpl implements War {
         return !allCardsHaveTheSameVal
                 && (roundNum - 1) % (numFaceDownCardsIfDraw + 1) == 0;
     }
+
     private void stopIfDone(Player[] players) {
         // number of players with at least one card in hand
         int numPlayesWithCard = 0;
@@ -104,9 +105,11 @@ public class WarImpl implements War {
         }
         if (numPlayesWithCard < 2) {
             hasAFinalWinner = true;
-            System.out.println("hasAFinalWinner = true. players = " + Arrays.toString(players));
+            System.out.println("hasAFinalWinner = true. players = "
+                    + Arrays.toString(players));
         }
     }
+
     private List<CardByPlayerId> getSortedCardsDealtThisRound(Player[] players) {
         List<CardByPlayerId> cardsDealtThisRound = new ArrayList<CardByPlayerId>();
         for (int i = 0; i < players.length; ++i) {

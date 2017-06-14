@@ -31,6 +31,11 @@ public class Player {
         this.name = name;
     }
 
+    public Player(Queue<Card> cardsInHand) {
+        super();
+        this.cardsInHand = cardsInHand;
+    }
+
     public String getName() {
         return name;
     }
