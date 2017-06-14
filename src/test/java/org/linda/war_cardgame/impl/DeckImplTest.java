@@ -41,7 +41,6 @@ public class DeckImplTest {
         assertEquals(cards.toString(), cardsCopy.toString());
         deckImpl.setCards(cards);
         deckImpl.shuffle();
-        deckImpl.shuffle();
         System.out.println("after shuffle, cards = " + cards);
         assertNotEquals(cards.toString(), cardsCopy.toString());
 

@@ -12,12 +12,11 @@ import org.junit.Test;
 import org.linda.war_cardgame.impl.DeckImpl;
 
 public class PlayerTest {
-    Queue<Card> cardsInHand;
     Player p; 
     
     @Before
     public void setUp() throws Exception {
-        cardsInHand = new LinkedList<>(Arrays.asList(new Card(
+        Queue<Card> cardsInHand = new LinkedList<>(Arrays.asList(new Card(
                 new Rank("5")), new Card(new Rank("6")),
                 new Card(new Rank("7")), new Card(new Rank("8"))));
         p = new Player(cardsInHand);
