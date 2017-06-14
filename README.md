@@ -1,5 +1,5 @@
 # WarCardGame
-Step 1: Edit # application.properties under src/main/resources<br />
+Step 1: Edit application.properties under src/main/resources<br />
 For Example:<br />
 suits=diamond, heart<br />
 ranks=ace, king, queen, jack, 10<br />
