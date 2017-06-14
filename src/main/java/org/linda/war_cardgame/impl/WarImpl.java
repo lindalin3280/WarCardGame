@@ -26,7 +26,7 @@ public class WarImpl implements War {
         do {
             System.out
                     .println("-------------------------------------------------------------------------");
-            System.out.println("At game " + count++);
+            System.out.println("Round " + count++);
             playOneTime(players);
             stopIfDone(players);
             for (Player player : players) {
@@ -105,8 +105,7 @@ public class WarImpl implements War {
         }
         if (numPlayesWithCard < 2) {
             hasAFinalWinner = true;
-            System.out.println("hasAFinalWinner = true. players = "
-                    + Arrays.toString(players));
+            System.out.println("hasAFinalWinner = true");
         }
     }
 
