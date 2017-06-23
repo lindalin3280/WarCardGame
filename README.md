@@ -20,32 +20,32 @@ Jack has 3 cards: [jack-diamond, queen-heart, 10-diamond]<br />
 Tom has 3 cards: [jack-heart, ace-heart, queen-diamond]<br />
 Hellen has 3 cards: [10-heart, ace-diamond, king-heart]<br />
 
-Round 1<br />
+Time 1<br />
 Jack has 5 cards: [queen-heart, 10-diamond, jack-diamond, jack-heart, 10-heart]<br />
 Tom has 2 cards: [ace-heart, queen-diamond]<br />
 Hellen has 2 cards: [ace-diamond, king-heart]<br />
 
-Round 2<br />
+Time 2<br />
 Jack has 4 cards: [10-diamond, jack-diamond, jack-heart, 10-heart]<br />
 Tom has 4 cards: [queen-diamond, ace-heart, ace-diamond, queen-heart]<br />
 Hellen has 1 cards: [king-heart]<br />
 
-Round 3<br />
+Time 3<br />
 Jack has 3 cards: [jack-diamond, jack-heart, 10-heart]<br />
 Tom has 3 cards: [ace-heart, ace-diamond, queen-heart]<br />
 Hellen has 3 cards: [king-heart, queen-diamond, 10-diamond]<br />
 
-Round 4<br />
+Time 4<br />
 Jack has 2 cards: [jack-heart, 10-heart]<br />
 Tom has 5 cards: [ace-diamond, queen-heart, ace-heart, king-heart, jack-diamond]<br />
 Hellen has 2 cards: [queen-diamond, 10-diamond]<br />
 
-Round 5<br />
+Time 5<br />
 Jack has 1 cards: [10-heart]<br />
 Tom has 7 cards: [queen-heart, ace-heart, king-heart, jack-diamond, ace-diamond, queen-diamond, jack-heart]<br />
 Hellen has 1 cards: [10-diamond]<br />
 
-Round 6<br />
+Time 6<br />
 hasAFinalWinner = true<br />
 Jack has 0 cards: []<br />
 Tom has 9 cards: [ace-heart, king-heart, jack-diamond, ace-diamond, queen-diamond, jack-heart, queen-heart, 10-heart, 10-diamond]<br />
