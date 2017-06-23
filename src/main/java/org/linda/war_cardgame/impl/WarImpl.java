@@ -142,7 +142,7 @@ public class WarImpl implements War {
     }
 
     /**
-     * Let each player deal one cards,
+     * Let each player deal one card,
      * get the sorted cards dealt in this round.
      * @param players
      * @return
