@@ -12,7 +12,13 @@ import org.linda.war_cardgame.pojo.Player;
 
 public class WarImpl implements War {
     static Logger logger = Logger.getLogger(WarImpl.class);
+    /**
+     * whether the final winner of the game has been determined
+     */
     private boolean hasAFinalWinner = false;
+    /**
+     * the number of face-down cards that every player should deal in case of draw/war
+     */
     public static int numFaceDownCardsIfDraw;
 
     @Override
@@ -26,7 +32,7 @@ public class WarImpl implements War {
         do {
             System.out
                     .println("-------------------------------------------------------------------------");
-            System.out.println("Round " + count++);
+            System.out.println("Time " + count++);
             playOneTime(players);
             stopIfDone(players);
             for (Player player : players) {
@@ -55,6 +61,9 @@ public class WarImpl implements War {
         return playersOfWar;
     }
 
+    /**
+     * play one or more rounds until someone gets all the cards on the table
+     */
     @Override
     public void playOneTime(Player[] players) {
         List<Card> cardsOnTable = new ArrayList<Card>();
@@ -80,7 +89,7 @@ public class WarImpl implements War {
                     + cardsOnTable + ", allCardsHaveTheSameVal = "
                     + allCardsHaveTheSameVal);
             if (sortedCardsDealtThisRound.size() < 2
-                    || shouldCheckWinner(allCardsHaveTheSameVal, roundNum)) {
+                    || shouldCheckWinnerInThisTime(allCardsHaveTheSameVal, roundNum)) {
                 winnerId = sortedCardsDealtThisRound.get(0).playerId;
                 break;
             }
@@ -89,12 +98,35 @@ public class WarImpl implements War {
 
     }
 
-    private boolean shouldCheckWinner(boolean allCardsHaveTheSameVal,
+    /**
+     * Find whether we should check if someone can win all the cards on the table
+     * 
+     * For example, if numFaceDownCardsIfDraw = 2,
+     * start from round 2, we check whether someone who can win all the cards on the table
+     * exists every third round until we find such a player
+     * 
+     * round  1, check if winner in this round exists. If not, continue to next round
+     * round  2, skip checking
+     * round  3, skip checking
+     * round  4, check if winner in this round exists. If not, continue to next round
+     * round  5, skip checking
+     * round  6, skip checking
+     * round  7, check if winner in this round exists. If not, continue to next round
+     * ...
+     * @param allCardsHaveTheSameVal
+     * @param roundNum
+     * @return
+     */
+    private boolean shouldCheckWinnerInThisTime(boolean allCardsHaveTheSameVal,
             int roundNum) {
         return !allCardsHaveTheSameVal
                 && (roundNum - 1) % (numFaceDownCardsIfDraw + 1) == 0;
     }
 
+    /**
+     * If only 0 or 1 player has cards in hand, the game is over.
+     * @param players
+     */
     private void stopIfDone(Player[] players) {
         // number of players with at least one card in hand
         int numPlayesWithCard = 0;
@@ -109,6 +141,12 @@ public class WarImpl implements War {
         }
     }
 
+    /**
+     * Let each player deal one cards,
+     * get the sorted cards dealt in this round.
+     * @param players
+     * @return
+     */
     private List<CardByPlayerId> getSortedCardsDealtThisRound(Player[] players) {
         List<CardByPlayerId> cardsDealtThisRound = new ArrayList<CardByPlayerId>();
         for (int i = 0; i < players.length; ++i) {
@@ -121,6 +159,12 @@ public class WarImpl implements War {
         return cardsDealtThisRound;
     }
 
+    /**
+     * A wrapper class that maps playerId to a Card.
+     * This wrapper class can be sorted based on the value on this card.
+     * @author Linda
+     *
+     */
     class CardByPlayerId implements Comparable<CardByPlayerId> {
         int playerId;
         Card card;
@@ -157,62 +201,5 @@ public class WarImpl implements War {
                 && sortedCardsDealtThisRound.get(0).card.getRank().compareTo(
                         sortedCardsDealtThisRound.get(sortedCardsDealtThisRound
                                 .size() - 1).card.getRank()) == 0;
-    }
-
-    public void playOneTime2(Player[] players) {
-        // cards on table
-        List<Card> cardsOnTable = new ArrayList<Card>();
-        Player winner = players[0];
-        // whether there exists someone wins this round
-        boolean someoneWinsThisRound = false;
-        int roundNum = 0;
-        int numFaceDownCardsOnTable = 0;
-        while (!someoneWinsThisRound) {
-            ++roundNum;
-            // number of players with at least one card in hand
-            int numPlayersWithCard = 0;
-            // the maximum face value of face-up cards on the table
-            int maxFaceVal = Integer.MIN_VALUE;
-            int preFaceVal = Integer.MIN_VALUE;
-            Player prePlayer = null;
-            for (Player player : players) {
-                // lose if no cards left
-                if (player.getCardsInHand().size() == 0) {
-                    continue;
-                }
-                Card dealtCard = player.dealCard();
-                if (player.getCardsInHand().size() > 0) {
-                    numPlayersWithCard++;
-                }
-                cardsOnTable.add(dealtCard);
-                if (roundNum > 1
-                        && numFaceDownCardsOnTable < numFaceDownCardsIfDraw) {
-                    ++numFaceDownCardsOnTable;
-                    continue;
-                }
-                int curFaceVal = dealtCard.getRank().getValue();
-                if (preFaceVal != curFaceVal) {
-                    if (preFaceVal != Integer.MIN_VALUE) {
-                        someoneWinsThisRound = true;
-                        if (curFaceVal > maxFaceVal) {
-                            winner = player;
-                            maxFaceVal = curFaceVal;
-                        }
-                    }
-                    preFaceVal = curFaceVal;
-                }
-                prePlayer = player;
-            }
-            if (numPlayersWithCard == 1) {
-                hasAFinalWinner = true;
-                break;
-            }
-        }
-        Collections.shuffle(cardsOnTable);
-        winner.addCards(cardsOnTable);
-
-        for (Player player : players) {
-            System.out.println(player);
-        }
     }
 }
