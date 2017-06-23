@@ -67,7 +67,7 @@ public class WarImpl implements War {
     @Override
     public void playOneTime(Player[] players) {
         List<Card> cardsOnTable = new ArrayList<Card>();
-        boolean allCardsHaveTheSameVal = false;
+        boolean ifAllCardsHaveTheSameVal = false;
         int roundNum = 0;
         int winnerId = 0;
         while (true) {
@@ -83,13 +83,13 @@ public class WarImpl implements War {
             for (CardByPlayerId p : sortedCardsDealtThisRound) {
                 cardsOnTable.add(p.card);
             }
-            allCardsHaveTheSameVal = allCardsHaveTheSameVal(sortedCardsDealtThisRound);
+            ifAllCardsHaveTheSameVal = ifAllCardsHaveTheSameVal(sortedCardsDealtThisRound);
             logger.debug("sortedCardsDealtThisRound = "
                     + sortedCardsDealtThisRound + ", cardsOnTable = "
-                    + cardsOnTable + ", allCardsHaveTheSameVal = "
-                    + allCardsHaveTheSameVal);
+                    + cardsOnTable + ", ifAllCardsHaveTheSameVal = "
+                    + ifAllCardsHaveTheSameVal);
             if (sortedCardsDealtThisRound.size() < 2
-                    || shouldCheckWinnerInThisTime(allCardsHaveTheSameVal, roundNum)) {
+                    || shouldCheckWinnerInThisTime(ifAllCardsHaveTheSameVal, roundNum)) {
                 winnerId = sortedCardsDealtThisRound.get(0).playerId;
                 break;
             }
@@ -195,7 +195,7 @@ public class WarImpl implements War {
      * @param cardsDealtThisRound
      * @return
      */
-    private boolean allCardsHaveTheSameVal(
+    private boolean ifAllCardsHaveTheSameVal(
             List<CardByPlayerId> sortedCardsDealtThisRound) {
         return sortedCardsDealtThisRound.size() > 0
                 && sortedCardsDealtThisRound.get(0).card.getRank().compareTo(
